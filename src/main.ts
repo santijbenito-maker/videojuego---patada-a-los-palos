@@ -135,9 +135,14 @@ async function init() {
         ballMesh.position.set(pos.x, pos.y, pos.z);
         ballMesh.quaternion.set(rot.x, rot.y, rot.z, rot.w);
 
-        // Camera follows ball slightly
-        camera.position.x = THREE.MathUtils.lerp(camera.position.x, pos.x * 0.3, 0.02);
-        camera.lookAt(pos.x * 0.5, Math.max(pos.y, 3), -52);
+        // Camera follows ball from behind
+        const targetCamX = pos.x * 0.5;
+        const targetCamY = Math.max(pos.y + 1.5, 2.5);
+        const targetCamZ = pos.z + 8;
+        camera.position.x = THREE.MathUtils.lerp(camera.position.x, targetCamX, 0.05);
+        camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetCamY, 0.05);
+        camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetCamZ, 0.05);
+        camera.lookAt(pos.x, pos.y, pos.z);
 
         // Check scoring
         const result = checkScore(bodies.ballBody, gameState);
@@ -159,6 +164,8 @@ async function init() {
         const r = bodies.ballBody.rotation();
         ballMesh.position.set(p.x, p.y, p.z);
         ballMesh.quaternion.set(r.x, r.y, r.z, r.w);
+
+        camera.lookAt(p.x, p.y, p.z);
 
         gameState.resultTimer += dt;
         if (gameState.resultTimer > 3) {
