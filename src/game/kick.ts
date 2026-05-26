@@ -1,4 +1,4 @@
-import RAPIER from '@dimforge/rapier3d';
+import RAPIER from '@dimforge/rapier3d-compat';
 import { GameState } from './state';
 
 const MAX_FORCE = 28;

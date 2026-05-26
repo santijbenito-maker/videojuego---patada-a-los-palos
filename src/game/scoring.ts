@@ -1,4 +1,4 @@
-import RAPIER from '@dimforge/rapier3d';
+import RAPIER from '@dimforge/rapier3d-compat';
 import { POSTS_Z } from '../scene/posts';
 import { GameState } from './state';
 
