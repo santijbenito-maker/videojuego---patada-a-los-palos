@@ -1,7 +1,7 @@
 import RAPIER from '@dimforge/rapier3d-compat';
 import { GameState } from './state';
 
-const MAX_FORCE = 28;
+const MAX_FORCE = 14;
 const KICK_ANGLE = 0.75; // Elevation angle in radians (~43 degrees)
 
 export function performKick(
