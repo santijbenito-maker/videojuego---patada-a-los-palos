@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patada a los Palos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; background: #000; font-family: 'Segoe UI', sans-serif; }
+    #app { width: 100vw; height: 100vh; }
+    canvas { display: block; }
+
+    #hud {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #score-panel {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 16px 24px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+
+    .stat {
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    .stat-value {
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    #power-container {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #power-bar-bg {
+      width: 100%;
+      height: 24px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.3);
+      overflow: hidden;
+    }
+
+    #power-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #4ade80, #facc15, #ef4444);
+      border-radius: 10px;
+      transition: width 0.05s linear;
+    }
+
+    #power-label {
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      margin-top: 8px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      letter-spacing: 1px;
+    }
+
+    #direction-indicator {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #direction-arrow {
+      width: 0; height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 30px solid rgba(255,255,255,0.8);
+      transform: rotate(0deg);
+      transition: transform 0.1s ease;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    #message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 48px;
+      font-weight: bold;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.7);
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    #instructions {
+      position: fixed;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      text-align: center;
+      pointer-events: none;
+      z-index: 10;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="hud">
+    <div id="score-panel">
+      <div class="stat">
+        <div class="stat-label">Puntos</div>
+        <div class="stat-value" id="score">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Intentos</div>
+        <div class="stat-value" id="attempts">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Convertidos</div>
+        <div class="stat-value" id="conversions">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="power-container">
+    <div id="power-bar-bg">
+      <div id="power-bar-fill"></div>
+    </div>
+    <div id="power-label">Mantené ESPACIO para cargar potencia</div>
+  </div>
+
+  <div id="direction-indicator">
+    <div id="direction-arrow"></div>
+  </div>
+
+  <div id="message"></div>
+  <div id="instructions">← → para ajustar dirección &nbsp;|&nbsp; ESPACIO para patear</div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
